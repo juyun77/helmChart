@@ -4,26 +4,20 @@
 
 appName: "jyshop"
 replicaCount: 2
-
 image:
   repository: 252340876984.dkr.ecr.ap-northeast-2.amazonaws.com/jy-shop
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "03c48"
-
+  tag: "13b54"
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
-
 podAnnotations: {}
-
 maxSurge: 34%
 maxUnavailable: 0%
-
 service:
   type: ClusterIP
   port: 5000
-
 ingress:
   annotations:
     kubernetes.io/ingress.class: alb
@@ -43,23 +37,21 @@ ingress:
                 name: jyshop
                 port:
                   number: 5000
-
   tls:
-   - hosts:
-       - juyun.link  # 실제 도메인으로 교체
-     secretName: juyun-acm-tls-secret  # 임의의 시크릿 이름으로 지정                
-
+    - hosts:
+        - juyun.link # 실제 도메인으로 교체
+      secretName: juyun-acm-tls-secret # 임의의 시크릿 이름으로 지정                
 resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+# We usually recommend not to specify default resources and to leave this as a conscious
+# choice for the user. This also increases chances charts run on environments with little
+# resources, such as Minikube. If you do want to specify resources, uncomment the following
+# lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+# limits:
+#   cpu: 100m
+#   memory: 128Mi
+# requests:
+#   cpu: 100m
+#   memory: 128Mi
 
 autoscaling:
   enabled: false
@@ -67,14 +59,11 @@ autoscaling:
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
-
 nodeSelector:
   nodeType: service-2024
-
 tolerations:
   - key: service
     operator: "Equal"
     value: "true"
     effect: "NoSchedule"
-
 affinity: {}
